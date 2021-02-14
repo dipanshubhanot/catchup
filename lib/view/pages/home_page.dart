@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:catchup/view/pages/post_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -9,7 +10,11 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("CatchUp"),
       ),
-      body: Center(child: Text("Hello World!")),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return PostCard();
+          }),
     );
   }
 }

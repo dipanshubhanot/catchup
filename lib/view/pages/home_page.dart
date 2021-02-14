@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:catchup/view/pages/post_card.dart';
+import 'package:catchup/view/widgets/post_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);

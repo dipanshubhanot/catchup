@@ -20,5 +20,5 @@ void main() {
 
     // Test: "Hello world!" text
     expect(find.text("Hello world!"), findsOneWidget);
-  });
+  }); 
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:catchup/view/widgets/post_card.dart';
-
+import 'package:catchup/helper/demo_values.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
@@ -11,9 +11,9 @@ class HomePage extends StatelessWidget {
         title: Text("CatchUp"),
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: DemoValues.posts.length,
           itemBuilder: (BuildContext context, int index) {
-            return PostCard();
+            return PostCard(postData: DemoValues.posts[index],);
           }),
     );
   }

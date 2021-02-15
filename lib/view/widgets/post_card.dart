@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:catchup/helper/common.dart';
+import 'package:catchup/view/widgets/post_time_stamp.dart';
 import 'package:flutter/material.dart';
 import 'package:catchup/helper/demo_values.dart';
 import 'package:catchup/view/presentation/themes.dart';
@@ -24,7 +26,9 @@ class PostCard extends StatelessWidget {
       onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (BuildContext context) {
-          return PostPage(postData: postData,);
+          return PostPage(
+            postData: postData,
+          );
         }));
       },
       child: AspectRatio(
@@ -73,19 +77,26 @@ class _PostTitleAndSummary extends StatelessWidget {
     final TextStyle summaryTheme = Theme.of(context).textTheme.body1;
     final String title = postData.title;
     final String summary = postData.summary;
-    final int flex = _isLandscape(context) ? 5 : 3;
+    final int flex = isLandscape(context) ? 5 : 3;
 
     return Expanded(
       flex: flex,
       child: Padding(
         padding: const EdgeInsets.only(left: 4.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(title, style: titleTheme),
-            SizedBox(height: 2.0),
-            Text(summary, style: summaryTheme),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(title, style: titleTheme),
+                SizedBox(height: 2.0),
+                Text(summary, style: summaryTheme),
+              ],
+            ),
+            PostTimeStamp(alignment: Alignment.centerRight),
           ],
         ),
       ),
@@ -98,7 +109,9 @@ class _PostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Image.asset(InheritedPostModel.of(context).postData.imageURL));
+    return Expanded(
+        flex: 2,
+        child: Image.asset(InheritedPostModel.of(context).postData.imageURL));
   }
 }
 
@@ -133,9 +146,11 @@ class _UserNameAndEmail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(InheritedPostModel.of(context).postData.author.name, style: nameTheme),
+            Text(InheritedPostModel.of(context).postData.author.name,
+                style: nameTheme),
             SizedBox(height: 2.0),
-            Text(InheritedPostModel.of(context).postData.author.email, style: emailTheme),
+            Text(InheritedPostModel.of(context).postData.author.email,
+                style: emailTheme),
           ],
         ),
       ),
@@ -151,7 +166,8 @@ class _UserImage extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: CircleAvatar(
-        backgroundImage: AssetImage(InheritedPostModel.of(context).postData.author.image),
+        backgroundImage:
+            AssetImage(InheritedPostModel.of(context).postData.author.image),
       ),
     );
   }
